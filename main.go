@@ -66,7 +66,7 @@ func main() {
 			jsonData.Addresses.ResentTo = transformStdAddressToEmailAddress(msg.ResentTo)
 			jsonData.Addresses.ResentCc = transformStdAddressToEmailAddress(msg.ResentCc)
 			jsonData.Addresses.ResentBcc = transformStdAddressToEmailAddress(msg.ResentBcc)
-
+			/*
 			for _, a := range msg.Attachments {
 				data, _ := ioutil.ReadAll(a.Data)
 				jsonData.Attachments = append(jsonData.Attachments, &EmailAttachment{
@@ -84,6 +84,7 @@ func main() {
 					Data:        base64.StdEncoding.EncodeToString(data),
 				})
 			}
+			*/
 
 			resp, err := resty.New().R().SetHeader("Content-Type", "application/json").SetBody(jsonData).Post(*flagWebhook)
 			if err != nil {
