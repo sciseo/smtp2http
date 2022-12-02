@@ -1,10 +1,10 @@
 package main
 
 import (
-	"encoding/base64"
+	//"encoding/base64"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	//"io/ioutil"
 	"log"
 	"net/mail"
 	"strings"
@@ -37,8 +37,8 @@ func main() {
 				ResentDate:    msg.ResentDate.String(),
 				ResentID:      msg.ResentMessageID,
 				Subject:       msg.Subject,
-				Attachments:   []*EmailAttachment{},
-				EmbeddedFiles: []*EmailEmbeddedFile{},
+				//Attachments:   []*EmailAttachment{},
+				//EmbeddedFiles: []*EmailEmbeddedFile{},
 			}
 
 			jsonData.Body.HTML = string(msg.HTMLBody)
@@ -66,6 +66,7 @@ func main() {
 			jsonData.Addresses.ResentTo = transformStdAddressToEmailAddress(msg.ResentTo)
 			jsonData.Addresses.ResentCc = transformStdAddressToEmailAddress(msg.ResentCc)
 			jsonData.Addresses.ResentBcc = transformStdAddressToEmailAddress(msg.ResentBcc)
+			
 			/*
 			for _, a := range msg.Attachments {
 				data, _ := ioutil.ReadAll(a.Data)
@@ -85,6 +86,8 @@ func main() {
 				})
 			}
 			*/
+			
+			
 
 			resp, err := resty.New().R().SetHeader("Content-Type", "application/json").SetBody(jsonData).Post(*flagWebhook)
 			if err != nil {
