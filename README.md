@@ -18,6 +18,9 @@ Or build it as it comes from the repo :
 - `docker build -t smtp2http .`
 - `docker run -p 25:25 smtp2http --timeout.read=50 --timeout.write=50 --webhook=http://some.hook/api`
 
+Production
+- `docker run -d --restart=always -p 25:25 smtp2http --timeout.read=10 --timeout.write=10 --webhook=http://some.hook/api`
+
 The `timeout` options are of course optional but make it easier to test in local with `telnet localhost 25`
 Here is a telnet example payload : 
 ```
